@@ -1,4 +1,4 @@
-// pages/product-details/[id].tsx
+import { notFound } from "next/navigation";
 import {
   productsData,
   SliderData,
@@ -6,15 +6,13 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-import { notFound } from "next/navigation";
-
-type Props = {
+type PageProps = {
   params: {
     id: string;
   };
 };
 
-export default function ProductDetails({ params }: Props) {
+export default function ProductDetails({ params }: PageProps) {
   const product: SliderData | undefined = productsData.find(
     (p) => p.id.toString() === params.id
   );
@@ -35,8 +33,8 @@ export default function ProductDetails({ params }: Props) {
 
       {/* Details */}
       <div className="md:w-1/2 space-y-4">
-        <h1 className="text-4xl font-bold ">{product.title}</h1>
-        <p className="">{product.description}</p>
+        <h1 className="text-4xl font-bold">{product.title}</h1>
+        <p>{product.description}</p>
         <p className="text-2xl font-semibold text-green-600 dark:text-green-400">
           ${product.price || "29.99"}
         </p>
