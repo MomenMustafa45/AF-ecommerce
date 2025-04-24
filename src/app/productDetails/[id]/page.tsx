@@ -6,15 +6,14 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
-export default function ProductDetails({ params }: PageProps) {
+export default async function ProductDetails({
+  params,
+}: Readonly<{
+  params: Promise<{ id: string }>;
+}>) {
+  const { id } = await params;
   const product: SliderData | undefined = productsData.find(
-    (p) => p.id.toString() === params.id
+    (p) => p.id.toString() === id
   );
 
   if (!product) return notFound();
